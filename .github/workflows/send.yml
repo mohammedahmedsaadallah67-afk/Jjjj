@@ -1,0 +1,16 @@
+name: discord sender
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send message
+        run: |
+          curl -s -X POST https://discord.com/api/v9/channels/1380746206678093884/messages \
+            -H "Authorization: ${{ secrets.DISCORD_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d '{"content": ".gen crunchyroll"}'
